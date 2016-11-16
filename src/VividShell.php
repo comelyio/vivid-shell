@@ -9,6 +9,8 @@ namespace Comely;
  */
 class VividShell
 {
+    const VERSION   =   "0.1.0";
+
     /**
      * @param string $string
      * @return string
@@ -91,6 +93,22 @@ class VividShell
         if($milliseconds    >   0) {
             usleep(intval(($milliseconds/1000)*pow(10,6)));
         }
+    }
+
+    /**
+     * @param string $char
+     * @param int $count
+     * @param int $wait
+     * @param string $eol
+     */
+    public static function Loading(string $char = ".", int $count = 3, int $wait = 200, $eol = PHP_EOL)
+    {
+        for($i=0;$i<$count;$i++) {
+            print $char;
+            self::Sleep($wait);
+        }
+
+        print $eol;
     }
 
     /**
