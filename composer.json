@@ -1,0 +1,17 @@
+{
+  "name": "comelyio/vivid-shell",
+  "description": "Print strings in rich format when running a CLI script",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Furqan A. Siddiqui",
+      "email": "mfsid@comely.io"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "autoload": {
+    "files": ["src/VividShell.php"]
+  }
+}
