@@ -1,6 +1,7 @@
 {
   "name": "comelyio/vivid-shell",
   "description": "Print strings in rich format when running a CLI script",
+  "keywords": ["comely", "comelyio", "vivid-shell", "vividshell", "shell", "bash"],
   "license": "MIT",
   "authors": [
     {
