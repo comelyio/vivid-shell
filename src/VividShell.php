@@ -9,13 +9,14 @@ namespace Comely;
  */
 class VividShell
 {
-    const VERSION   =   "0.1.0";
+    const VERSION   =   "0.1.2";
 
     /**
      * @param string $string
+     * @param bool $reset
      * @return string
      */
-    public static function Prepare(string $string) : string
+    public static function Prepare(string $string, bool $reset = true) : string
     {
         $prepared   =   preg_replace_callback(
             '/\{([a-z]+|\/)\}/i',
@@ -61,7 +62,11 @@ class VividShell
             $string
         );
 
-        return $prepared . "\e[0m";
+        if($reset) {
+            $prepared   .=  "\e[0m";
+        }
+
+        return $prepared;
     }
 
     /**
@@ -96,12 +101,30 @@ class VividShell
     }
 
     /**
+     * @param string $string
+     * @param int $wait
+     * @param string $style
+     * @param string $eol
+     */
+    public static function Type(string $string, int $wait = 100, $style = "", $eol = PHP_EOL)
+    {
+        print self::Prepare($style, false);
+        $chars  =   str_split($string);
+        foreach($chars as $char) {
+            print $char;
+            self::Sleep($wait);
+        }
+
+        print "\e[0m" . $eol;
+    }
+
+    /**
      * @param string $char
      * @param int $count
      * @param int $wait
      * @param string $eol
      */
-    public static function Loading(string $char = ".", int $count = 3, int $wait = 200, $eol = PHP_EOL)
+    public static function Repeat(string $char = ".", int $count = 3, int $wait = 200, $eol = PHP_EOL)
     {
         for($i=0;$i<$count;$i++) {
             print $char;
@@ -109,18 +132,5 @@ class VividShell
         }
 
         print $eol;
-    }
-
-    /**
-     * @param string $word
-     * @param int $times
-     * @param int $wait
-     * @param string $eol
-     */
-    public static function Repeat(string $word = ".", int $times = 3, int $wait = 300, string $eol = PHP_EOL)
-    {
-        for($i=0;$i<$times;$i++) {
-            self::Print($word, $wait, null, $eol);
-        }
     }
 }
