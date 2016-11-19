@@ -9,7 +9,7 @@ namespace Comely;
  */
 class VividShell
 {
-    const VERSION   =   "0.1.2";
+    const VERSION   =   "0.1.3";
 
     /**
      * @param string $string
@@ -88,6 +88,16 @@ class VividShell
 
         print self::Prepare($string) . $eol;
         self::Sleep($wait);
+    }
+
+    /**
+     * @param string $string
+     * @param int $wait
+     * @param array|null $data
+     */
+    public static function Inline(string $string, int $wait = 0, array $data = null)
+    {
+        self::Print($string, $wait, $data, "");
     }
 
     /**
