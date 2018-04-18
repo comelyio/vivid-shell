@@ -1,24 +1,35 @@
 <?php
+/**
+ * This file is part of Comely Vivid Shell package.
+ * https://github.com/comelyio/vivid-shell
+ *
+ * Copyright (c) 2018 Furqan A. Siddiqui <hello@furqansiddiqui.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code or visit following link:
+ * https://github.com/comelyio/vivid-shell/blob/master/LICENSE
+ */
+
 declare(strict_types=1);
 
-namespace Comely;
+namespace Comely\VividShell;
 
 /**
  * Class VividShell
- * @package Comely
+ * @package Comely\VividShell
  */
 class VividShell
 {
-    const VERSION   =   "0.1.3";
+    const VERSION = "0.1.5";
 
     /**
      * @param string $string
      * @param bool $reset
      * @return string
      */
-    public static function Prepare(string $string, bool $reset = true) : string
+    public static function Prepare(string $string, bool $reset = true): string
     {
-        $prepared   =   preg_replace_callback(
+        $prepared = preg_replace_callback(
             '/\{([a-z]+|\/)\}/i',
             function ($modifier) {
                 switch (strtolower($modifier[1] ?? "")) {
@@ -62,8 +73,8 @@ class VividShell
             $string
         );
 
-        if($reset) {
-            $prepared   .=  "\e[0m";
+        if ($reset) {
+            $prepared .= "\e[0m";
         }
 
         return $prepared;
@@ -82,8 +93,8 @@ class VividShell
      */
     public static function Print(string $string, int $wait = 0, array $data = null, $eol = PHP_EOL)
     {
-        if(is_array($data)) {
-            $string =   vsprintf($string, $data);
+        if (is_array($data)) {
+            $string = vsprintf($string, $data);
         }
 
         print self::Prepare($string) . $eol;
@@ -105,8 +116,8 @@ class VividShell
      */
     public static function Sleep(int $milliseconds = 0)
     {
-        if($milliseconds    >   0) {
-            usleep(intval(($milliseconds/1000)*pow(10,6)));
+        if ($milliseconds > 0) {
+            usleep(intval(($milliseconds / 1000) * pow(10, 6)));
         }
     }
 
@@ -119,8 +130,8 @@ class VividShell
     public static function Type(string $string, int $wait = 100, $style = "", $eol = PHP_EOL)
     {
         print self::Prepare($style, false);
-        $chars  =   str_split($string);
-        foreach($chars as $char) {
+        $chars = str_split($string);
+        foreach ($chars as $char) {
             print $char;
             self::Sleep($wait);
         }
@@ -136,7 +147,7 @@ class VividShell
      */
     public static function Repeat(string $char = ".", int $count = 3, int $wait = 200, $eol = PHP_EOL)
     {
-        for($i=0;$i<$count;$i++) {
+        for ($i = 0; $i < $count; $i++) {
             print $char;
             self::Sleep($wait);
         }

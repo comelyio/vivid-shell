@@ -1,5 +1,4 @@
-# VividShell
-[https://github.com/comelyio/vivid-shell]()
+# Vivid Shell
 
 Print strings in rich format when running a CLI script
 

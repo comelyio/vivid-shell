@@ -14,8 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Comely\\VividShell\\": "src/VividShell/"
-    },
-    "files": ["src/VividShell.php"]
+      "Comely\\VividShell\\": "src"
+    }
   }
 }
